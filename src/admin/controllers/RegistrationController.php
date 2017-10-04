@@ -12,4 +12,20 @@ class RegistrationController extends Controller
 
 		echo $this->twig->render('registration.php', array('book' => 'PHP'));	
 	}
+	function makeRegistrationAction()
+	{
+		if (isset($_POST['registration_submit'])) {
+			$user['userlogin'] = $_POST['userlogin'];
+			$user['userpassword'] = $_POST['userpassword'];
+			$user['useremail'] = $_POST['useremail'];
+		}
+		else {
+			$error = "Не нажата кнопка registration_submit";
+			echo $this->twig->render('error.php', array('error' => $error));
+		}
+
+		$data = $this->model->get_data("RegistrationModel", "setRegistration", $user);
+		
+		echo $this->twig->render('registration.php', array('answer' => $data));
+	}
 }
