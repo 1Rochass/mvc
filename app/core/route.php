@@ -35,9 +35,9 @@ class Route
 		self::$ActionName = strtolower(self::$ActionName) . "Action";
 
 		// Проверяем наличие файла
-		if (file_exists("../src/" . self::$BoundleName . "/controllers/" . self::$ControllerName . ".php")) {
+		if (file_exists("src/" . self::$BoundleName . "/controllers/" . self::$ControllerName . ".php")) {
 
-			require_once "../src/" . self::$BoundleName . "/controllers/" . self::$ControllerName . ".php";
+			require_once "src/" . self::$BoundleName . "/controllers/" . self::$ControllerName . ".php";
 
 		}
 		else {
@@ -53,7 +53,8 @@ class Route
 			$Action = self::$ActionName;
 
 			$Controller = new $Controller();
-			$Controller->$Action(Route::$BoundleName);
+			// $Controller->$Action(Route::$BoundleName);
+			$Controller->$Action();
 
 		}
 		else{

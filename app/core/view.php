@@ -51,7 +51,7 @@ class View implements Twig_LoaderInterface
 
 	public function __construct()
 	{
-		$this->loader = new Twig_Loader_Filesystem('../src/admin/views/');
+		$this->loader = new Twig_Loader_Filesystem('src/admin/views/');
 		$this->twig = new Twig_Environment($this->loader);
 	}
 
