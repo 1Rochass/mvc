@@ -3,8 +3,8 @@
 <div id="registration_form">
 	<form action="/admin/Registration/makeRegistration" method="POST">
 		<div class="form-group">
-			<label for="userlogin">Логин</label>
-			<input type="text" name="userlogin" id="userlogin" class="form-control">	
+			<label for="username">Логин</label>
+			<input type="text" name="username" id="username" class="form-control">	
 		</div>
 		<div class="form-group">
 			<label for="userpassword">Пароль</label>
@@ -16,7 +16,13 @@
 		</div>
 		<button type="submit" name="registration_submit" class="btn btn-default">Submit</button>
 	</form>
-	{{ answer }}
+	
+	{% for ans in answer %}
+	{{ ans.id }}
+	{{ ans.username }}
+	<br>
+	{% endfor %}
+	<!-- {{ answer }} -->
 </div>
 {% endblock body %}
 

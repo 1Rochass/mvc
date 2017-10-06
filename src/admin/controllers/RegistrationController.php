@@ -15,7 +15,7 @@ class RegistrationController extends Controller
 	function makeRegistrationAction()
 	{
 		if (isset($_POST['registration_submit'])) {
-			$user['userlogin'] = $_POST['userlogin'];
+			$user['username'] = $_POST['username'];
 			$user['userpassword'] = $_POST['userpassword'];
 			$user['useremail'] = $_POST['useremail'];
 		}
