@@ -1,0 +1,178 @@
+<?php
+if (empty($argv[1])) { // php bin/console
+	
+	// Приветствие
+	echo "\n *************";
+	echo "\n *** HELLO ***";
+	echo "\n *************";
+
+	echo "\n You can see all parameters if you write 'help': ";
+	$query = trim(fgets(STDIN)); // Данные принимаемые из консоли
+
+	Console::consoleRouting($query); // Вызываем главный класс
+}
+else { // php bin/console create::bundle
+	//echo "\n " . $argv[1]; // Проверка
+	Console::consoleRouting($argv[1]); // Вызываем главный класс
+}
+
+
+
+ // Главный класс - роутер и также содержащий список возможных команд в консли
+class Console
+{	
+	static $parameters = array( // Список возможных команд в консли
+				"create::bundle"=>"Write to make a bundle.",
+				"create::something"=>"Create something."
+			);
+
+	// Метод роутер 
+	static function consoleRouting($query)
+	{
+		if ($query === "help") {
+			Console::help();	
+ 		}
+ 		else{
+ 			// Узнаем название класса и метода
+ 			$classNameClassMethod = explode("::", $query);
+
+ 			$class = $classNameClassMethod[0]; // Название класса
+ 			$method = $classNameClassMethod[1]; // Название метода
+
+ 			// Проверяем наличие класса
+ 			if (class_exists($class)) {
+ 				//echo "\n class exist"; // Проверка
+ 			}
+ 			else{
+ 				echo "\n Something wrong with: " . $query . "\n";
+ 				exit();
+ 			}
+ 			// Проверяем наличие метода
+ 			if (method_exists($class, $method)) {
+ 				//echo "\n method exist"; // Проверка
+ 			}
+ 			else{
+ 				echo "\n Something wrong with: " . $query . "\n";
+ 				exit();
+ 			}
+
+ 			// Вызываем класс с статическим методом. Пример: create::bundle()
+ 			$class::$method(); 
+ 		}
+	}
+	static function help()
+	{
+		foreach (self::$parameters as $key => $value) { // Выводим список консольных команд
+			echo "\n " . $key . " _____ " . $value;
+		}
+		echo "\n"; // Так визуально лучше смотрится
+	}
+}
+
+// Вспомогательный класс 
+class Create
+{
+	static function bundle() // Метод создающий boundle
+	{
+		echo "\n Write Bundle name : ";
+		$bundleName = trim(fgets(STDIN)); // Принимаем данные из консоли
+
+		// Если имя Boundle не введено
+		if (empty($bundleName)) {
+			echo "\n Warning! Boundle name can not be empty. \n";
+			exit();
+		}
+
+		// Пути к папкам
+		$BundleNamePath =  "src/" . $bundleName;
+		$BundleContollersPath = "src/" . $bundleName . "/controllers";
+		$BundleModelsPath = "src/" . $bundleName . "/models";
+		$BundleViewsPath = "src/" . $bundleName . "/views";
+
+
+		// Создаем папки и файлы для бандла
+		if (file_exists($BundleNamePath)) { // Проверяем есть ли папка с таким именем
+			echo "\n Boundle with name \"" . $bundleName . "\" exist";
+			exit();
+		}
+		else{
+			mkdir($BundleNamePath, 0777); // Создаем папку с правами доступа 0777
+			if (file_exists($BundleNamePath)) { // Проверка
+				echo "\n Boundle \"" . $bundleName . "\" created";
+			}
+
+			// BoundleContollers
+			mkdir($BundleContollersPath, 0777);	// Создаем папку
+			if (file_exists($BundleContollersPath)) { // Проверка
+				echo "\n created " . $BundleContollersPath;
+			}
+			
+			// BoundleModels
+			mkdir($BundleModelsPath, 0777);	// Создаем папку
+			if (file_exists($BundleModelsPath)) { // Проверка
+				echo "\n created " . $BundleModelsPath;
+			}
+			
+			// BoundleViews
+			mkdir($BundleViewsPath, 0777);	// Создаем папку
+			if (file_exists($BundleViewsPath)) { // Проверка
+				echo "\n created " . $BundleViewsPath;
+			}
+
+
+			// Создаем файлы для бандла
+
+			// Файл controllers/NameController.php
+			$controllerName = ucfirst($bundleName) . "Controller"; // Создаем имя контроллера с заглавной буквы
+			$controllerPath = $BundleNamePath . "/controllers/" . $controllerName . ".php";
+			$controllerData = "
+<?php 
+class " . $controllerName . " extends Controller
+{
+	public function indexAction()
+	{
+		echo \$this->twig->render('index.php', array('hello' =>'Hello " . $bundleName . "'));	
+	}
+}
+			"; 
+
+			$controllerData = trim($controllerData); // Убираем лишние пробелы
+			
+			if (fopen($controllerPath, "a+")) { // Создаем файл
+				// Вставляем данные в файл
+				if (file_put_contents($controllerPath, $controllerData)) { 
+					echo "\n created " . $controllerPath;
+				}
+				else{
+					echo "Data can not be inserted in the file " . $controllerPath;
+				}
+			}
+			else{
+				echo "File " . $controllerPath . " did not created";
+			}
+
+
+			// Файл views/index.php
+			$viewPath = $BundleNamePath . "/views/index.php";
+			$viewData = "{{ hello }}"; 
+			$viewrData = trim($viewData); // Убираем лишние пробелы
+			
+			if (fopen($viewPath, "a+")) { // Создаем файл
+				// Вставляем данные в файл
+				if (file_put_contents($viewPath, $viewrData)) { 
+					echo "\n created " . $viewPath;
+				}
+				else{
+					echo "Data can not be inserted in the file " . $viewPath;
+				}
+			}
+			else{
+				echo "File " . $viewPath . " did not created";
+			}
+
+			echo "\n\n Great Job! \n"; // Так визуально лучше смотрится
+		}
+	}
+}
+
+?>
