@@ -4,6 +4,6 @@ class AppController extends Controller
 {
 	public function abraAction()
 	{
-		echo $this->twig->render('index.php', array('book' => 'You must be valid'));	
+		echo View::$twig->render('index.php', array('book' => 'You must be valid'));	
 	}
 }

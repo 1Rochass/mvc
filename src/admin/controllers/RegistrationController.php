@@ -10,7 +10,7 @@ class RegistrationController extends Controller
 		// $loader = new Twig_Loader_Filesystem('../src/admin/views/');
 		// $twig = new Twig_Environment($loader);
 
-		echo $this->twig->render('registration.php', array('book' => 'PHP'));	
+		echo View::$twig->render('registration.php', array('book' => 'PHP'));	
 	}
 	public function makeRegistrationAction()
 	{
@@ -21,11 +21,11 @@ class RegistrationController extends Controller
 		}
 		else {
 			$error = "Не нажата кнопка registration_submit";
-			echo $this->twig->render('error.php', array('error' => $error));
+			echo View::$twig->render('error.php', array('error' => $error));
 		}
 
 		$data = $this->model->get_data("RegistrationModel", "setRegistration", $user);
 		
-		echo $this->twig->render('registration.php', array('answer' => $data));
+		echo View::$twig->render('registration.php', array('answer' => $data));
 	}
 }

@@ -4,7 +4,7 @@ class MainController extends Controller
 {
 	public function indexAction()
 	{
-		echo $this->twig->render('index.php', array('book' => 'MainController'));	
+		echo View::$twig->render('index.php', array('book' => 'MainController'));	
 	}
 
 }

@@ -3,7 +3,7 @@ class LoginController extends Controller
 {
 	public function indexAction()
 	{
-		echo $this->twig->render('login.php', array('message'=> 'Fill the form to login'));
+		echo View::$twig->render('login.php', array('message'=> 'Fill the form to login'));
 
 	}
 	public function checkLoginAction()
@@ -12,7 +12,7 @@ class LoginController extends Controller
 		if (isset($_POST['login_submit'])) {
 			// Если пустые поля отправляем на login.php 
 			if ($_POST['username'] == "" or $_POST['userpassword'] == "") {
-				echo $this->twig->render('login.php', array('message' => 'The fields are empty try again'));
+				echo View::$twig->render('login.php', array('message' => 'The fields are empty try again'));
 			}
 			// Создаем массив из пришедших данных
 			$user['username'] = $_POST['username'];
@@ -20,7 +20,7 @@ class LoginController extends Controller
 		}
 		else {
 			$error = "Не нажата кнопка registration_submit";
-			echo $this->twig->render('error.php', array('error' => $error));
+			echo View::$twig->render('error.php', array('error' => $error));
 		}
 		// Отправляем данные в LoginModel
 		$data = $this->model->get_data("LoginModel", "checkLogin", $user);
@@ -34,12 +34,12 @@ class LoginController extends Controller
 			}
 			// Если проблемы с сессией отправляем на login.php
 			else {
-				echo $this->twig->render('login.php', array('message' => 'Problem with sessionMakeVariable'));	
+				echo View::$twig->render('login.php', array('message' => 'Problem with sessionMakeVariable'));	
 			}			
 		}
 		// Если юзер не админ отправляем на login.php
 		else {
-			echo $this->twig->render('login.php', array('message' => 'You are not administrator'));
+			echo View::$twig->render('login.php', array('message' => 'You are not administrator'));
 		} 
 	}
 }

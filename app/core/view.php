@@ -46,14 +46,14 @@ interface Twig_LoaderInterface
 }
 class View implements Twig_LoaderInterface 
 {
-	public $loader;
-	public $twig;
+	static $loader;
+	static $twig;
 
 	public function __construct()
 	{
         $path = "src/" . Route::$BoundleName . "/views/";
-		$this->loader = new Twig_Loader_Filesystem($path);
-		$this->twig = new Twig_Environment($this->loader);
+		self::$loader = new Twig_Loader_Filesystem($path);
+		self::$twig = new Twig_Environment(self::$loader);
 	}
 
 	public function getSourceContext($name)
@@ -72,8 +72,4 @@ class View implements Twig_LoaderInterface
 	{
 
 	}	
-	// static function generate($bundleName, $view, $data=null)
-	// {
-	// 	require "../src/" . $bundleName . "/views/" . $view;
-	// }
 }

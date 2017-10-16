@@ -6,6 +6,7 @@ class Kernel
 	{
 		Session::sessionStart();
 		Route::routeStart();
-		Verification::verificationStart();		
+		Verification::verificationStart();
+		ErrorCollector::showErrors();		
 	}	
 }

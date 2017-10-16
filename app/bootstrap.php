@@ -12,6 +12,7 @@ require_once "app/core/View.php";
 require_once "app/core/Model.php";
 
 require_once "app/core/Verification.php";
+require_once "app/core/ErrorCollector.php";
 
 //Twig
 require_once 'vendor/autoload.php';

@@ -1,10 +1,9 @@
 <?php 
 class Route 
 {
-	static $ControllerName;
+	static $ControllerName; 
 	static $ActionName;
 	static $BoundleName;
-	static $Error;
 
 	static function routeStart()
 	{
@@ -45,7 +44,7 @@ class Route
 		}
 		else {
 
-			Route::$Error[] = "File " . Route::$ControllerName . ".php does not exist"; // Файл не найден
+			ErrorCollector::$errors[] = "File " . Route::$ControllerName . ".php does not exist"; // Файл не найден
 
 		}
 
@@ -53,30 +52,22 @@ class Route
 		if(class_exists(Route::$ControllerName)){
 
 			$Controller = self::$ControllerName;
-			$Action = self::$ActionName;
-			// Создаем обьект контроллера и запускаем его метод
-			$Controller = new $Controller();
-			$Controller->$Action();
-		}
-		else{
-
-			Route::$Error[] = "Class " . Route::$ControllerName . " does not exist"; // Класс не найден
-
-		}
-		
-
-		// Запускаем вывод ошибок
-		Route::error();
-	}
-
-	static function error()
-	{
-		if (count(Route::$Error) >= 1) {
-
-			foreach (Route::$Error as $key => $value) {
-			echo $value . "<br>";
+			if (method_exists(Route::$ControllerName, Route::$ActionName)) {
+				$Action = self::$ActionName;
+				// Создаем обьект контроллера и запускаем его метод
+				$Controller = new $Controller();
+				$Controller->$Action();
+			}
+			else{
+				// Метод не найден
+				ErrorCollector::$errors[] = "Method " . Route::$ActionName . " does not exist"; 
 			}
 		}
-		
-	} 
+		else{
+			// Класс не найден
+			ErrorCollector::$errors[] = "Class " . Route::$ControllerName . " does not exist"; 
+		}
+	}
+
+	
 } 
