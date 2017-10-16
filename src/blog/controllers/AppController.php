@@ -2,8 +2,8 @@
 
 class AppController extends Controller
 {
-	public function abraAction($BoundleName)
+	public function abraAction()
 	{
-		View::generate($BoundleName, "abra.php");
+		echo $this->twig->render('index.php', array('book' => 'You must be valid'));	
 	}
 }

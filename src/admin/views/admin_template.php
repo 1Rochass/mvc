@@ -15,6 +15,9 @@
 {% endblock head %}
 </head>
 <body>
+<form action="/admin/Logout/logout" method=POST>
+	<button name="logout_submit" class="btn btn-default">Logout</button>
+</form>
 {% block body %}
 {% endblock body %}
 </body>

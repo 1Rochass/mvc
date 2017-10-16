@@ -1,11 +1,25 @@
 <?php 	
-require_once "app/core/route.php";
-require_once "app/core/controller.php";
-require_once "app/core/view.php";
-require_once "app/core/model.php";
+// Main class
+require_once "app/core/Kernel.php";
+
+require "app/config/config.php";
+
+require_once "app/core/Session.php";
+
+require_once "app/core/Route.php";
+require_once "app/core/Controller.php";
+require_once "app/core/View.php";
+require_once "app/core/Model.php";
+
+require_once "app/core/Verification.php";
 
 //Twig
 require_once 'vendor/autoload.php';
 
-// Запускает роутер
-Route::start();
+
+// Start
+Kernel::kernelStart();
+
+
+
+

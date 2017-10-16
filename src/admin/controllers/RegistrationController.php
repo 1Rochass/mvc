@@ -2,7 +2,7 @@
 class RegistrationController extends Controller
 {
 
-	function registrationAction()
+	public function indexAction()
 	{
 		//View::generate($BoundleName, "registration.php");
 
@@ -12,7 +12,7 @@ class RegistrationController extends Controller
 
 		echo $this->twig->render('registration.php', array('book' => 'PHP'));	
 	}
-	function makeRegistrationAction()
+	public function makeRegistrationAction()
 	{
 		if (isset($_POST['registration_submit'])) {
 			$user['username'] = $_POST['username'];

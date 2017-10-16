@@ -1,5 +1,6 @@
 {% extends "admin_template.php" %}
 {% block body %}
+{% block registration %}
 <div id="registration_form">
 	<form action="/admin/Registration/makeRegistration" method="POST">
 		<div class="form-group">
@@ -24,6 +25,7 @@
 	{% endfor %}
 	<!-- {{ answer }} -->
 </div>
+{% endblock registration%}
 {% endblock body %}
 
 

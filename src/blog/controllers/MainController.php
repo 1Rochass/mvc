@@ -2,9 +2,9 @@
 
 class MainController extends Controller
 {
-	public function indexAction($BoundleName)
+	public function indexAction()
 	{
-		View::generate($BoundleName, "index.php");
+		echo $this->twig->render('index.php', array('book' => 'MainController'));	
 	}
 
 }

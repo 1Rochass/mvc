@@ -10,7 +10,7 @@ class RegistrationModel extends Model
 		// Work with RedBeanPHP
 		R::setup('mysql:host=localhost;dbname=mvc', 'root', 'toor'); // Connection
 
-		// $user = R::dispense('users');	// Make a bean
+		$user = R::dispense('users');	// Make a bean
 		
 		// Заполняем данными поля username и т.д.
 		// $user->username = $username;	// ORM 
@@ -35,7 +35,7 @@ class RegistrationModel extends Model
 		// {{ ans.username }}
 		// <br>
 		// {% endfor %}
-		//return $data = R::getAll("SELECT * FROM users");
+		return $data = R::getAll("SELECT * FROM users");
 
 		// Проверка
 		// if ($id > 0) {

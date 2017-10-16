@@ -6,7 +6,7 @@ class Route
 	static $BoundleName;
 	static $Error;
 
-	static function start()
+	static function routeStart()
 	{
 
 		self::$ControllerName = "Main"; 
@@ -30,7 +30,10 @@ class Route
 			self::$ActionName = $route[3];	
 
 		}
-		
+	}
+
+	static function routeRequireController ()
+	{
 		self::$ControllerName = self::$ControllerName . "Controller"; 
 		self::$ActionName = strtolower(self::$ActionName) . "Action";
 
@@ -51,11 +54,9 @@ class Route
 
 			$Controller = self::$ControllerName;
 			$Action = self::$ActionName;
-
+			// Создаем обьект контроллера и запускаем его метод
 			$Controller = new $Controller();
-			//$Controller->$Action(Route::$BoundleName);
 			$Controller->$Action();
-
 		}
 		else{
 
