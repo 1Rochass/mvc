@@ -7,14 +7,15 @@ class LoginModel extends Model
 		$userpassword = $user['userpassword'];
 
 		// Work with RedBeanPHP
-		R::setup('mysql:host=localhost;dbname=mvc', 'root', 'toor'); // Connection
-		
-		$user = R::dispense('users'); // Создаем bean
-
-		$user = R::findOne('users', 'username = ?', array($username)); // Записываем в массив данные
+		// Connection
+		R::setup('mysql:host=localhost;dbname=mvc', 'root', 'toor');
+		// Create bean
+		$user = R::dispense('users'); 
+		// Write data in array 
+		$user = R::findOne('users', 'username = ?', array($username)); 
 		
 		if (is_object($user)) {
-			// Проверяем является uer админом
+			// Проверяем является user админом
 			if ($user->admin == 1) {
 				return $user;
 			}

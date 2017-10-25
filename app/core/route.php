@@ -45,6 +45,7 @@ class Route
 		else {
 
 			ErrorCollector::$errors[] = "File " . Route::$ControllerName . ".php does not exist"; // Файл не найден
+			ErrorCollector::showErrors();	
 
 		}
 
@@ -61,11 +62,13 @@ class Route
 			else{
 				// Метод не найден
 				ErrorCollector::$errors[] = "Method " . Route::$ActionName . " does not exist"; 
+				ErrorCollector::showErrors();	
 			}
 		}
 		else{
 			// Класс не найден
 			ErrorCollector::$errors[] = "Class " . Route::$ControllerName . " does not exist"; 
+			ErrorCollector::showErrors();	
 		}
 	}
 

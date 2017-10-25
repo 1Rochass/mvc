@@ -8,7 +8,8 @@ class RegistrationModel extends Model
 		$useremail = $user['useremail'];
 
 		// Work with RedBeanPHP
-		R::setup('mysql:host=localhost;dbname=mvc', 'root', 'toor'); // Connection
+		// Connection
+		R::setup('mysql:host=localhost;dbname=mvc', 'root', 'toor'); 
 
 		$user = R::dispense('users');	// Make a bean
 		

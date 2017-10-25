@@ -7,6 +7,6 @@ class Kernel
 		Session::sessionStart();
 		Route::routeStart();
 		Verification::verificationStart();
-		ErrorCollector::showErrors();		
+			
 	}	
 }

@@ -131,7 +131,7 @@ class " . $controllerName . " extends Controller
 {
 	public function indexAction()
 	{
-		echo \$this->twig->render('index.php', array('hello' =>'Hello " . $bundleName . "'));	
+		echo View::\$twig->render('index.php', array('hello' =>'Hello " . $bundleName . "'));	
 	}
 }
 			"; 

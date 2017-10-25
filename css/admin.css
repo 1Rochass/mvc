@@ -8,3 +8,12 @@
 	height: 240px;
 	margin: 200px auto;
 }
+#create-article-form {
+	width: 240px;
+	height: 240px;
+	margin: 200px auto;
+}
+#article_text {
+	width: 240px;
+	height: 100px;
+}

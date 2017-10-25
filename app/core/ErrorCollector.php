@@ -9,12 +9,11 @@ class ErrorCollector
 	// }
 	static function showErrors()
 	{
-		self::$errors[] = "First error";
 		if (count(self::$errors) >= 1) {
-			// foreach (Route::$Error as $key => $value) {
-			// echo $value . "<br>";
+			foreach (ErrorCollector::$errors as $key => $value) {
 			$view = new View();
-			View::$twig->render('Error.php', array('message' => ErrorCollector::$errors));
+			echo View::$twig->render('error.php', array('message' => ErrorCollector::$errors));
+			}
 			exit();
 		}	
 	} 
