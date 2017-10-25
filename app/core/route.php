@@ -11,8 +11,11 @@ class Route
 		self::$ControllerName = "Main"; 
 		self::$ActionName = "index";
 		self::$BoundleName = "blog";
-
-		$route = explode("/", $_SERVER['REQUEST_URI']);
+		
+		// Cut GET request like ?article=1&page=2
+		$requestUri = preg_replace("/[?&*]\w+[=]\w+/", "", $_SERVER['REQUEST_URI']);
+		
+		$route = explode("/", $requestUri);
 
 		if(!empty($route[1])){
 
@@ -70,7 +73,5 @@ class Route
 			ErrorCollector::$errors[] = "Class " . Route::$ControllerName . " does not exist"; 
 			ErrorCollector::showErrors();	
 		}
-	}
-
-	
+	}	
 } 
