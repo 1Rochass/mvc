@@ -12,7 +12,7 @@ class Route
 		self::$ActionName = "index";
 		self::$BoundleName = "blog";
 		
-		// Cut GET request like ?article=1&page=2
+		// Cuting GET request like ?article=1&page=2
 		$requestUri = preg_replace("/[?&*]\w+[=]\w+/", "", $_SERVER['REQUEST_URI']);
 		
 		$route = explode("/", $requestUri);

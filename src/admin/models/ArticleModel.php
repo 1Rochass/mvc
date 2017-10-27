@@ -37,12 +37,40 @@ class ArticleModel
 		
 		return Pagination::showPages();
 	}
-	public function updateArticle()
+	public function updateArticle($article)
 	{
+		// If $article contains only article id
+		if (isset($article['updateArticle'])) {
+			
+			R::setup('mysql:host=localhost;dbname=mvc', 'root', 'toor');
+			$updateArticle = R::dispense('articles');
+			$updateArticle->article_title = $article['article_title'];
+			$updateArticle->article_text = $article['article_text'];
+			$updateArticle->id = $article['id'];
+			$id = R::store($updateArticle);
 
+			if ($id > 0) {
+				$data['article'] = $article;
+				$data['message'] = "Updated";
+				return $data;
+			}			
+			else {
+				return $data['message'] = "Something wrong with Update";;
+			}
+		}
+		else {
+			R::setup('mysql:host=localhost;dbname=mvc', 'root', 'toor');
+			R::dispense('articles');
+			return $data = R::load('articles', $article['id']);
+		}
 	}
-	public function deleteArticle()
+	public function deleteArticle($article)
 	{
-
+		R::setup('mysql:host=localhost;dbname=mvc', 'root', 'toor');
+		$deleteArticle = R::dispense('articles');
+		// Signed id wich we must delete
+		$deleteArticle->id = $article['id'];
+		R::trash($deleteArticle);
+		return "Article with id " . $article['id'] . " was deleted.";
 	}
 }

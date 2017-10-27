@@ -43,10 +43,24 @@ class  ArticleController extends Controller
 	}
 	public function updateArticleAction()
 	{
-
+		if (isset($_REQUEST['showArticleForUpdate'])) {
+			$article['id'] = $_REQUEST['id'];
+			$data = $this->model->get_data('ArticleModel', 'updateArticle', $article);
+			echo View::$twig->render('updateArticleView.php', array('article' => $data));
+		}
+		if (isset($_REQUEST['updateArticle'])) {
+			// All arguments what we need to update article we taking from $_REQUEST
+			$article = $_REQUEST;
+	 		$data = $this->model->get_data('ArticleModel', 'updateArticle', $article);
+			echo View::$twig->render('updateArticleView.php', array('article' => $data['article'], 'message' => $data['message']));
+		 } 	
 	}
 	public function deleteArticleAction()
 	{
-
+		if (isset($_REQUEST['deleteArticle'])) {
+			$article['id']= $_REQUEST['id'];
+			$data = $this->model->get_data('ArticleModel', 'deleteArticle', $article);
+			echo View::$twig->render('updateArticleView.php', array('message' => $data));
+		}
 	}
 }
